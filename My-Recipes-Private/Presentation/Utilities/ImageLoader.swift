@@ -51,7 +51,13 @@ final class ImageLoader: ImageLoaderProtocol {
 			}
 			
 			if let image = UIImage(data: data) {
-				cache.storeCachedResponse(CachedURLResponse(response: response, data: data), for: request)
+				cache.storeCachedResponse(
+					CachedURLResponse(
+						response: response,
+						data: data
+					),
+					for: request
+				)
 				updatePhase(.success(Image(uiImage: image)))
 			} else {
 				throw URLError(.cannotDecodeContentData)
