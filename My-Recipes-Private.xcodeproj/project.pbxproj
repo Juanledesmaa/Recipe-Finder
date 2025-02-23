@@ -53,11 +53,6 @@
 			path = "My-Recipes-PrivateTests";
 			sourceTree = "<group>";
 		};
-		281CD20F2D66CADC002B0621 /* My-Recipes-PrivateUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "My-Recipes-PrivateUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +85,6 @@
 			children = (
 				281CD1F42D66CADB002B0621 /* My-Recipes-Private */,
 				281CD2052D66CADC002B0621 /* My-Recipes-PrivateTests */,
-				281CD20F2D66CADC002B0621 /* My-Recipes-PrivateUITests */,
 				281CD1F32D66CADB002B0621 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,9 +159,6 @@
 			);
 			dependencies = (
 				281CD20E2D66CADC002B0621 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				281CD20F2D66CADC002B0621 /* My-Recipes-PrivateUITests */,
 			);
 			name = "My-Recipes-PrivateUITests";
 			packageProductDependencies = (
