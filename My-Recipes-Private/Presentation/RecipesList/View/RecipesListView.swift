@@ -33,21 +33,27 @@ struct RecipesListView: View {
 
 	@ViewBuilder
 	private var content: some View {
-		if viewModel.isLoading {
-			ProgressView("Loading Recipes...")
-		} else if let error = viewModel.error {
-			Text("Error: \(error.localizedDescription)").foregroundColor(.red)
-		} else if let recipesList = viewModel.recipesList {
-			ScrollView {
-				LazyVGrid(columns: columns, spacing: 16) {
-					ForEach(recipesList.recipes, id: \.uuid) { recipe in
-						RecipeCardView(recipe: recipe)
-					}
-				}
+		VStack {
+			TextField("Search recipes...", text: $viewModel.searchQuery)
+				.textFieldStyle(RoundedBorderTextFieldStyle())
 				.padding()
+
+			if viewModel.isLoading {
+				ProgressView("Loading Recipes...")
+			} else if let error = viewModel.error {
+				Text("Error: \(error.localizedDescription)").foregroundColor(.red)
+			} else if let _ = viewModel.recipesList {
+				ScrollView {
+					LazyVGrid(columns: columns, spacing: 16) {
+						ForEach(viewModel.filteredRecipes, id: \.uuid) { recipe in
+							RecipeCardView(recipe: recipe)
+						}
+					}
+					.padding()
+				}
+			} else {
+				EmptyView()
 			}
-		} else {
-			EmptyView()
 		}
 	}
 }

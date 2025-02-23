@@ -12,7 +12,18 @@ final class RecipesListViewModel: ObservableObject {
 	@Published var recipesList: RecipesList?
 	@Published var isLoading: Bool = false
 	@Published var error: Error?
+	@Published var searchQuery: String = ""
 	
+	var filteredRecipes: [Recipe] {
+		guard let recipes = recipesList?.recipes else { return [] }
+
+		return searchQuery.isEmpty ? recipes : recipes.filter { recipe in
+			recipe.name.localizedCaseInsensitiveContains(searchQuery) ||
+			recipe.cuisine.localizedCaseInsensitiveContains(searchQuery)
+			
+		}
+	}
+
 	private let fetchRecipesListUseCase: FetchRecipesListUseCase
 	
 	init(fetchRecipesListUseCase: FetchRecipesListUseCase) {
