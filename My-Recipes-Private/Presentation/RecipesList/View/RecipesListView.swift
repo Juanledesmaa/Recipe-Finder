@@ -34,16 +34,10 @@ struct RecipesListView: View {
 	@ViewBuilder
 	private var content: some View {
 		VStack {
-			TextField(
-				viewModel.viewData.textFieldPlaceholder,
+			RoundedTextField(
+				placeholder: viewModel.viewData.textFieldPlaceholder,
 				text: $viewModel.searchQuery
 			)
-			.padding(.horizontal, 16)
-			.padding(.vertical, 12)
-			.background(Color.gray.opacity(0.2))
-			.cornerRadius(25)
-			.textFieldStyle(.plain)
-			.padding()
 			Spacer()
 			
 			switch viewModel.state {
@@ -51,17 +45,27 @@ struct RecipesListView: View {
 					ProgressView(viewModel.viewData.progressViewText)
 						.frame(maxWidth: .infinity, maxHeight: .infinity)
 				case .error:
-					PlaceholderView(
-						imageName: viewModel.viewData.errorImageName,
-						title: viewModel.viewData.errorTitle,
-						subtitle: viewModel.viewData.errorSubtitle,
-						imageSize: viewModel.viewData.errorImageSize
-					)
+					CenteredVerticalScrollView {
+						PlaceholderView(
+							imageName: viewModel.viewData.errorImageName,
+							title: viewModel.viewData.errorTitle,
+							subtitle: viewModel.viewData.errorSubtitle,
+							imageSize: viewModel.viewData.errorImageSize
+						)
+					} onRefresh: {
+						try? await Task.sleep(nanoseconds: 300_000_000)
+						await viewModel.fetchRecipesList()
+					}
 				case .empty:
-					PlaceholderView(
-						imageName: viewModel.viewData.emptyImageName,
-						title: viewModel.viewData.emptyRecipesTitle
-					)
+					CenteredVerticalScrollView {
+						PlaceholderView(
+							imageName: viewModel.viewData.emptyImageName,
+							title: viewModel.viewData.emptyRecipesTitle
+						)
+					} onRefresh: {
+						try? await Task.sleep(nanoseconds: 300_000_000)
+						await viewModel.fetchRecipesList()
+					}
 				case .success:
 					ScrollView {
 						LazyVGrid(columns: columns, spacing: 16) {
@@ -82,7 +86,7 @@ struct RecipesListView: View {
 						try? await Task.sleep(nanoseconds: 300_000_000)
 						await viewModel.fetchRecipesList()
 					}
-					.transaction { $0.animation = nil }
+//					.transaction { $0.animation = nil }
 			}
 		}
 	}
