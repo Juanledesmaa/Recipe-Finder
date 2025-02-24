@@ -8,9 +8,16 @@
 import Foundation
 
 struct AppConfiguration: ConfigurationProtocol {
+	
 	var baseUrl: String {
-		return Bundle.main.object(
+		return bundle.object(
 			forInfoDictionaryKey: "BaseURL"
 		) as? String ?? ""
+	}
+	
+	private let bundle: Bundle
+
+	init(bundle: Bundle = .main) {
+		self.bundle = bundle
 	}
 }
