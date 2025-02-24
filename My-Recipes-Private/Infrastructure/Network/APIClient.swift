@@ -21,7 +21,6 @@ final class APIClient: APIClientProtocol {
 		
 		let (data, response) = try await session.data(for: request)
 		
-		// TODO: FEB 23
 		guard let httpResponse = response as? HTTPURLResponse else {
 			throw APIError.invalidResponse
 		}
