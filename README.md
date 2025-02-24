@@ -2,14 +2,10 @@
 
 ## TODO: 
 * Fill This Readme.
-* Pull To refresh.
-* Unit tests for all business logic.
-* Handle edge cases. 1. Malformed Recipe. 2. Empty Recipes List.
-* Search bar above to filter recipes.
+* Unit tests for all business logic. 10%
 * Fav button, probably trading this one off.
 * Offline support? Possible trade-off.
-* Refine UI for slow connections
-* App Icon
+* Refine UI for slow connections. Shimmering maybe?
 * Beatiful App Screenshots
 
 ### Summary: Include screen shots or a video of your app highlighting its features
