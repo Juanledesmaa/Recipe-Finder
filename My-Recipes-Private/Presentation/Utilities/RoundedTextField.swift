@@ -17,6 +17,7 @@ struct RoundedTextField: View {
 
 	var body: some View {
 		TextField(placeholder, text: $text)
+			.autocorrectionDisabled(true)
 			.padding(.horizontal, horizontalPadding)
 			.padding(.vertical, verticalPadding)
 			.background(backgroundColor)

@@ -9,28 +9,36 @@ import SwiftUI
 
 struct CachedAsyncImageView: View {
 	let url: URL
+	let placeholderImage: UIImage?
 	@StateObject var imageLoader: ImageLoader
 	
-	init(url: URL) {
+	init(url: URL, placeholderImage: UIImage? = nil) {
 		self.url = url
+		self.placeholderImage = placeholderImage
 		_imageLoader = StateObject(wrappedValue: ImageLoader(url: url))
 	}
 	
 	var body: some View {
 		Group {
 			switch imageLoader.phase {
-				case .empty:
-					Color.gray
+				case .empty, .failure(_):
+					if let placeholderImage = placeholderImage {
+						Image(uiImage: placeholderImage)
+							.resizable()
+							.aspectRatio(contentMode: .fit)
+					}
+					Color.gray.opacity(0.6)
 				case .success(let image):
 					image
 						.resizable()
 						.aspectRatio(contentMode: .fill)
-				case .failure(_):
-					Image(systemName: "photo")
-						.resizable()
 				@unknown default:
-					Image(systemName: "photo")
-						.resizable()
+					if let placeholderImage = placeholderImage {
+						Image(uiImage: placeholderImage)
+							.resizable()
+							.aspectRatio(contentMode: .fit)
+					}
+					Color.gray.opacity(0.6)
 			}
 		}
 		.onAppear {

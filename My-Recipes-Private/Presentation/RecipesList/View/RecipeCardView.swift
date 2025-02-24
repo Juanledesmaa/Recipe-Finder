@@ -15,11 +15,10 @@ struct RecipeCardView: View {
 			if let url = URL(
 				string: recipe.photoUrlSmall ?? ""
 			) {
-				CachedAsyncImageView(url: url)
+				CachedAsyncImageView(url: url, placeholderImage: .dining)
 					.scaledToFill()
 					.opacity(0.7)
 					.clipped()
-					.background(Color.black)
 			} else {
 				Color.gray
 			}

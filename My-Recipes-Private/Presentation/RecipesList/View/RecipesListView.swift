@@ -56,6 +56,7 @@ struct RecipesListView: View {
 						try? await Task.sleep(nanoseconds: 300_000_000)
 						await viewModel.fetchRecipesList()
 					}
+					.scrollDismissesKeyboard(.interactively)
 				case .empty:
 					CenteredVerticalScrollView {
 						PlaceholderView(
@@ -66,6 +67,7 @@ struct RecipesListView: View {
 						try? await Task.sleep(nanoseconds: 300_000_000)
 						await viewModel.fetchRecipesList()
 					}
+					.scrollDismissesKeyboard(.interactively)
 				case .success:
 					ScrollView {
 						LazyVGrid(columns: columns, spacing: 16) {
@@ -82,11 +84,11 @@ struct RecipesListView: View {
 							value: viewModel.recipes
 						)
 					}
+					.scrollDismissesKeyboard(.interactively)
 					.refreshable {
 						try? await Task.sleep(nanoseconds: 300_000_000)
 						await viewModel.fetchRecipesList()
 					}
-//					.transaction { $0.animation = nil }
 			}
 		}
 	}
