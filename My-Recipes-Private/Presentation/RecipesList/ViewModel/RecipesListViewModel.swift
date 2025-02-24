@@ -5,41 +5,65 @@
 //  Created by Juanito on 2/22/25.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 final class RecipesListViewModel: ObservableObject {
-	@Published var recipesList: RecipesList?
-	@Published var isLoading: Bool = false
-	@Published var error: Error?
-	@Published var searchQuery: String = ""
+	struct RecipesListViewData {
+		let navigationTitle = "Recipes"
+		let textFieldPlaceholder = "Search recipes..."
+		let progressViewText = "Loading Recipes..."
+		let errorImageSize = CGSize(width: 100, height: 100)
+		let errorImageName = "alert"
+		let errorTitle = "An error occurred while fetching recipes."
+		let errorSubtitle = "Please try again later."
+		let emptyImageName = "vegetables"
+		let emptyRecipesTitle = "No recipes could be found."
+	}
 	
-	var filteredRecipes: [Recipe] {
-		guard let recipes = recipesList?.recipes else { return [] }
+	enum RecipesListState {
+		case loading
+		case error(Error)
+		case empty
+		case success([Recipe])
+	}
 
-		return searchQuery.isEmpty ? recipes : recipes.filter { recipe in
-			recipe.name.localizedCaseInsensitiveContains(searchQuery) ||
-			recipe.cuisine.localizedCaseInsensitiveContains(searchQuery)
-			
+	let viewData = RecipesListViewData()
+	@Published var state: RecipesListState = .loading
+	@Published var recipes: [Recipe] = []
+	@Published var searchQuery: String = "" {
+		didSet {
+			filterRecipesIfNeeded()
 		}
 	}
 
 	private let fetchRecipesListUseCase: FetchRecipesListUseCase
-	
+
 	init(fetchRecipesListUseCase: FetchRecipesListUseCase) {
 		self.fetchRecipesListUseCase = fetchRecipesListUseCase
 	}
-	
+
 	func fetchRecipesList() async {
-		isLoading = true
-		error = nil
-		defer { isLoading = false }
+		state = .loading
 
 		do {
 			let result = try await fetchRecipesListUseCase.execute()
-			recipesList = result
+			state = result.recipes.isEmpty ? .empty : .success(result.recipes)
+			filterRecipesIfNeeded()
 		} catch {
-			self.error = error
+			state = .error(error)
+		}
+	}
+	
+	private func filterRecipesIfNeeded() {
+		if case .success(let recipes) = state {
+			self.recipes = searchQuery
+				.isEmpty ? recipes : recipes.filter { recipe in
+					recipe.name.localizedCaseInsensitiveContains(searchQuery) ||
+					recipe.cuisine.localizedCaseInsensitiveContains(searchQuery)
+			}
+		} else {
+			recipes = []
 		}
 	}
 }
