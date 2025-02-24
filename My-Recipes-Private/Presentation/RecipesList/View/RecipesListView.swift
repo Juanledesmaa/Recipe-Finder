@@ -23,36 +23,66 @@ struct RecipesListView: View {
 	var body: some View {
 		NavigationView {
 			content
-				.navigationTitle("Recipes")
+				.navigationTitle(viewModel.viewData.navigationTitle)
 				.background(Color.appColor.primaryBackground)
 		}
 		.task {
 			await viewModel.fetchRecipesList()
 		}
 	}
-
+	
 	@ViewBuilder
 	private var content: some View {
 		VStack {
-			TextField("Search recipes...", text: $viewModel.searchQuery)
-				.textFieldStyle(RoundedBorderTextFieldStyle())
-				.padding()
-
-			if viewModel.isLoading {
-				ProgressView("Loading Recipes...")
-			} else if let error = viewModel.error {
-				Text("Error: \(error.localizedDescription)").foregroundColor(.red)
-			} else if let _ = viewModel.recipesList {
-				ScrollView {
-					LazyVGrid(columns: columns, spacing: 16) {
-						ForEach(viewModel.filteredRecipes, id: \.uuid) { recipe in
-							RecipeCardView(recipe: recipe)
+			TextField(
+				viewModel.viewData.textFieldPlaceholder,
+				text: $viewModel.searchQuery
+			)
+			.padding(.horizontal, 16)
+			.padding(.vertical, 12)
+			.background(Color.gray.opacity(0.2))
+			.cornerRadius(25)
+			.textFieldStyle(.plain)
+			.padding()
+			Spacer()
+			
+			switch viewModel.state {
+				case .loading:
+					ProgressView(viewModel.viewData.progressViewText)
+						.frame(maxWidth: .infinity, maxHeight: .infinity)
+				case .error:
+					PlaceholderView(
+						imageName: viewModel.viewData.errorImageName,
+						title: viewModel.viewData.errorTitle,
+						subtitle: viewModel.viewData.errorSubtitle,
+						imageSize: viewModel.viewData.errorImageSize
+					)
+				case .empty:
+					PlaceholderView(
+						imageName: viewModel.viewData.emptyImageName,
+						title: viewModel.viewData.emptyRecipesTitle
+					)
+				case .success:
+					ScrollView {
+						LazyVGrid(columns: columns, spacing: 16) {
+							ForEach(
+								viewModel.recipes,
+								id: \.uuid
+							) { recipe in
+								RecipeCardView(recipe: recipe)
+							}
 						}
+						.padding()
+						.animation(
+							.easeInOut,
+							value: viewModel.recipes
+						)
 					}
-					.padding()
-				}
-			} else {
-				EmptyView()
+					.refreshable {
+						try? await Task.sleep(nanoseconds: 300_000_000)
+						await viewModel.fetchRecipesList()
+					}
+					.transaction { $0.animation = nil }
 			}
 		}
 	}

@@ -9,10 +9,24 @@ import SwiftUI
 
 final class ImageLoader: ImageLoaderProtocol {
 	@Published var phase: AsyncImagePhase = .empty
-	
+
 	private let url: URL?
 	private let urlSession: URLSession
 	private let cache: URLCache
+	
+	private static let defaultCache: URLCache = {
+		URLCache(
+			memoryCapacity: 100 * 1024 * 1024,
+			diskCapacity: 500 * 1024 * 1024,
+			diskPath: "RecipesList-imagesCache"
+		)
+	}()
+	
+	private static let imageSession: URLSession = {
+		let configuration = URLSessionConfiguration.ephemeral
+		configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+		return URLSession(configuration: configuration)
+	}()
 	
 	init(
 		url: URL?,
@@ -72,18 +86,4 @@ final class ImageLoader: ImageLoaderProtocol {
 			phase = newPhase
 		}
 	}
-	
-	private static let defaultCache: URLCache = {
-		URLCache(
-			memoryCapacity: 100 * 1024 * 1024,
-			diskCapacity: 500 * 1024 * 1024,
-			diskPath: "RecipesList-imagesCache"
-		)
-	}()
-	
-	private static let imageSession: URLSession = {
-		let configuration = URLSessionConfiguration.ephemeral
-		configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-		return URLSession(configuration: configuration)
-	}()
 }
