@@ -34,7 +34,7 @@ struct RecipesListView: View {
 	@ViewBuilder
 	private var content: some View {
 		VStack {
-			RoundedTextField(
+			RoundedTextFieldView(
 				placeholder: viewModel.viewData.textFieldPlaceholder,
 				text: $viewModel.searchQuery
 			)

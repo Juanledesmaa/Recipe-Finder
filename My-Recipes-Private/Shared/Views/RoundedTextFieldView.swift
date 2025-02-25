@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RoundedTextField: View {
+struct RoundedTextFieldView: View {
 	var placeholder: String
 	@Binding var text: String
 	var backgroundColor: Color = Color.gray.opacity(0.2)

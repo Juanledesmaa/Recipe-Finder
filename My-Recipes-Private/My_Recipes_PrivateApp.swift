@@ -11,7 +11,7 @@ import SwiftUI
 struct My_Recipes_PrivateApp: App {
     var body: some Scene {
         WindowGroup {
-			let apiClient = APIClient(
+			let networkClient = NetworkClient(
 				session: URLSession(
 					configuration: .ephemeral
 				)
@@ -22,18 +22,12 @@ struct My_Recipes_PrivateApp: App {
 			)
 			
 			let remoteDataSource = RemoteRecipesListDataSource(
-				apiClient: apiClient,
+				networkClient: networkClient,
 				apiConfiguration: recipesListAPIConfiguration
 			)
 
-			let repository = RecipesListRepositoryImplementation(
-				dataSource: remoteDataSource
-			)
-			let fetchRecipesListUseCase = FetchRecipesListUseCase(
-				repository: repository
-			)
 			let viewModel = RecipesListViewModel(
-				fetchRecipesListUseCase: fetchRecipesListUseCase
+				recipesListDataSource: remoteDataSource
 			)
 			RecipesListView(viewModel: viewModel)
         }

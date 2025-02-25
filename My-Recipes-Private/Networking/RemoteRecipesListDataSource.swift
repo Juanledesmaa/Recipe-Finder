@@ -8,14 +8,14 @@
 import Foundation
 
 final class RemoteRecipesListDataSource: RecipesListDataSource {
-	let apiClient: APIClientProtocol
+	let networkClient: NetworkClientProtocol
 	let apiConfiguration: RecipesListAPIConfiguration
 	
 	init(
-		apiClient: APIClientProtocol,
+		networkClient: NetworkClientProtocol,
 		apiConfiguration: RecipesListAPIConfiguration
 	) {
-		self.apiClient = apiClient
+		self.networkClient = networkClient
 		self.apiConfiguration = apiConfiguration
 	}
 	
@@ -30,6 +30,6 @@ final class RemoteRecipesListDataSource: RecipesListDataSource {
 			)
 		}
 		
-		return try await apiClient.request(url: url, method: .get)
+		return try await networkClient.request(url: url, method: .get)
 	}
 }

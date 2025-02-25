@@ -37,17 +37,17 @@ final class RecipesListViewModel: ObservableObject {
 		}
 	}
 
-	private let fetchRecipesListUseCase: FetchRecipesListUseCase
+	private let recipesListDataSource: RecipesListDataSource
 
-	init(fetchRecipesListUseCase: FetchRecipesListUseCase) {
-		self.fetchRecipesListUseCase = fetchRecipesListUseCase
+	init(recipesListDataSource: RecipesListDataSource) {
+		self.recipesListDataSource = recipesListDataSource
 	}
 
 	func fetchRecipesList() async {
 		state = .loading
 
 		do {
-			let result = try await fetchRecipesListUseCase.execute()
+			let result = try await recipesListDataSource.fetchRecipes()
 			state = result.recipes.isEmpty ? .empty : .success(result.recipes)
 			filterRecipesIfNeeded()
 		} catch {

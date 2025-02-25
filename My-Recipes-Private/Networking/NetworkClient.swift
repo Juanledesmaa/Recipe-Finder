@@ -1,5 +1,5 @@
 //
-//  APIClient.swift
+//  NetworkClient.swift
 //  My-Recipes-Private
 //
 //  Created by Juanito on 2/22/25.
@@ -7,15 +7,19 @@
 
 import Foundation
 
-final class APIClient: APIClientProtocol {
+final class NetworkClient: NetworkClientProtocol {
 	
+	private static let sharedSession = URLSession.shared
 	private let session: URLSession
 	
-	init(session: URLSession = .shared) {
+	init(session: URLSession = sharedSession) {
 		self.session = session
 	}
 
-	func request<T: Decodable>(url: URL, method: HTTPMethod) async throws -> T {
+	func request<T: Decodable>(
+		url: URL,
+		method: HTTPMethod = .get
+	) async throws -> T {
 		var request = URLRequest(url: url)
 		request.httpMethod = method.rawValue
 		
@@ -32,6 +36,11 @@ final class APIClient: APIClientProtocol {
 					jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
 					return try jsonDecoder.decode(T.self, from: data)
 				} catch {
+					let responseString = String(
+						data: data,
+						encoding: .utf8
+					) ?? "Unreadable Data"
+					print("Decoding Failed for URL: \(url) | Response: \(responseString)")
 					throw APIError.decodingFailed(error)
 				}
 			case 400...499:
