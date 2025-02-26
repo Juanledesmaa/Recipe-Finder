@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "281CD1F12D66CADB002B0621"
-               BuildableName = "My-Recipes-Private.app"
-               BlueprintName = "My-Recipes-Private"
-               ReferencedContainer = "container:My-Recipes-Private.xcodeproj">
+               BuildableName = "Recipe Finder.app"
+               BlueprintName = "Recipe Finder"
+               ReferencedContainer = "container:Recipe Finder.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,36 +30,37 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:Recipe Finder Debug.xctestplan"
+            reference = "container:Recipe Finder Staging.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
             skipped = "NO"
-            parallelizable = "NO">
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "281CD2012D66CADC002B0621"
-               BuildableName = "My-Recipes-PrivateTests.xctest"
-               BlueprintName = "My-Recipes-PrivateTests"
-               ReferencedContainer = "container:My-Recipes-Private.xcodeproj">
+               BuildableName = "Recipe FinderTests.xctest"
+               BlueprintName = "Recipe FinderTests"
+               ReferencedContainer = "container:Recipe Finder.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "281CD20B2D66CADC002B0621"
-               BuildableName = "My-Recipes-PrivateUITests.xctest"
-               BlueprintName = "My-Recipes-PrivateUITests"
-               ReferencedContainer = "container:My-Recipes-Private.xcodeproj">
+               BuildableName = "Recipe FinderUITests.xctest"
+               BlueprintName = "Recipe FinderUITests"
+               ReferencedContainer = "container:Recipe Finder.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -73,9 +74,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "281CD1F12D66CADB002B0621"
-            BuildableName = "My-Recipes-Private.app"
-            BlueprintName = "My-Recipes-Private"
-            ReferencedContainer = "container:My-Recipes-Private.xcodeproj">
+            BuildableName = "Recipe Finder.app"
+            BlueprintName = "Recipe Finder"
+            ReferencedContainer = "container:Recipe Finder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -90,9 +91,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "281CD1F12D66CADB002B0621"
-            BuildableName = "My-Recipes-Private.app"
-            BlueprintName = "My-Recipes-Private"
-            ReferencedContainer = "container:My-Recipes-Private.xcodeproj">
+            BuildableName = "Recipe Finder.app"
+            BlueprintName = "Recipe Finder"
+            ReferencedContainer = "container:Recipe Finder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
