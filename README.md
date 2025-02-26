@@ -26,10 +26,12 @@
 
 * Look and Feel: As a user, I appreciate having the option to use an app in dark mode, so I made sure to include that feature for a more customizable experience.
 
-Improve Developer Experience: I'm used to working on teams that collaborate on shared features. By adding a debug menu that allows switching between different cases in our flow, we can help developers who are onboarding to our feature gain visual cues on how our project works.
+* Improve Developer Experience: I'm used to working on teams that collaborate on shared features. By adding a debug menu that allows switching between different cases in our flow, we can help developers who are onboarding to our feature gain visual cues on how our project works.
 
 
 ### Time Spent: Approximately how long did you spend working on this project? How did you allocate your time?
+
+I spent almost three development days on this project (around 6-8 hours each day). I allocated the time as follows:
 
 1. Project Setup and Architecture (20%)
 I began by defining the code layers, folder structure, and separation of concerns. The business models and networking layer were also established at this stage. We verified a successful connection to the app’s remote resources and ensured the business layer was properly integrated.
