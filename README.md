@@ -1,4 +1,4 @@
-# my-recipes-private
+# Welcome to Recipe Finder README 
 
 ### Summary: Include screen shots or a video of your app highlighting its features
 
