@@ -7,6 +7,13 @@
 <img src="https://github.com/user-attachments/assets/effaea5f-0208-4ef5-b858-b860b978d829" alt="Screenshot_3" width="200">
 <img src="https://github.com/user-attachments/assets/e1f272cf-abd4-44dc-a38c-1db15302885d" alt="Screenshot_4" width="200">
 
+| Scenario                | Video |
+|-------------------------|-------|
+| Slow Network connection showcasing image cache | https://www.youtube.com/shorts/Avpho--l7L0 |
+| Debug configuration showcasing edge cases | https://youtube.com/shorts/HnGCuETkUuw|
+| Dark Mode & Light Mode | https://youtube.com/shorts/jjJ-hxJupDM |
+
+
 ### Focus Areas: What specific areas of the project did you prioritize? Why did you choose to focus on these areas?
 
 * User Experience: From the start, the look and feel of the app was my main area of focus. I chose to prioritize this because I believe a user's first impression of an application is shaped by how smooth and useful the experience is.
@@ -18,6 +25,8 @@
 * Project Structure & Architecture: As a developer accustomed to working with peers, I know how easy it is to overlook clean structure and proper separation of concerns in the rush of development. From the start, I prioritized a SOLID + DRY approach, ensuring each layer is well-separated based on its responsibility.
 
 * Look and Feel: As a user, I appreciate having the option to use an app in dark mode, so I made sure to include that feature for a more customizable experience.
+
+Improve Developer Experience: I'm used to working on teams that collaborate on shared features. By adding a debug menu that allows switching between different cases in our flow, we can help developers who are onboarding to our feature gain visual cues on how our project works.
 
 
 ### Time Spent: Approximately how long did you spend working on this project? How did you allocate your time?
@@ -61,7 +70,12 @@ Every app has room for improvement. In this final step, we reviewed functionalit
 
 ### Weakest Part of the Project: What do you think is the weakest part of your project?
 
-TODO :c
+I do think there's few part of the project that could be improved such as: 
+
+* Accessibility: We should always take in mind all the possible user base
+* Lack of support for localization.
+* UI Is very plain and lacks features that could make the search for recipes easier, such as tagged recipes, favorites or tabs.
+* Lack of offline support (Cached response)
 
 ### Additional Information: Is there anything else we should know? Feel free to share any insights or constraints you encountered.
 
