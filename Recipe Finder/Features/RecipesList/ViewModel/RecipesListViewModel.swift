@@ -25,15 +25,14 @@ final class RecipesListViewModel: ObservableObject {
 		case loading
 		case error(Error)
 		case empty
-		case success([Recipe])
+		case success
 
 		static func == (lhs: RecipesListState, rhs: RecipesListState) -> Bool {
 			switch (lhs, rhs) {
 			case (.loading, .loading),
-				 (.empty, .empty):
-				return true
-			case let (.success(lhsRecipes), .success(rhsRecipes)):
-				return lhsRecipes == rhsRecipes
+					(.empty, .empty),
+					(.success, .success):
+					return true
 			case let (.error(lhsError), .error(rhsError)):
 				return lhsError.localizedDescription == rhsError.localizedDescription
 			default:
@@ -52,6 +51,7 @@ final class RecipesListViewModel: ObservableObject {
 	}
 
 	private let recipesListDataSource: RecipesListDataSource
+	private var allRecipes: [Recipe] = []
 
 	init(recipesListDataSource: RecipesListDataSource) {
 		self.recipesListDataSource = recipesListDataSource
@@ -63,7 +63,8 @@ final class RecipesListViewModel: ObservableObject {
 
 		do {
 			let result = try await recipesListDataSource.fetchRecipes()
-			state = result.recipes.isEmpty ? .empty : .success(result.recipes)
+			state = result.recipes.isEmpty ? .empty : .success
+			allRecipes = result.recipes
 			filterRecipesIfNeeded()
 		} catch {
 			state = .error(error)
@@ -71,13 +72,16 @@ final class RecipesListViewModel: ObservableObject {
 	}
 	
 	private func filterRecipesIfNeeded() {
-		if case .success(let recipes) = state {
-			self.shownRecipes = searchQuery
-				.isEmpty ? recipes : recipes.filter { recipe in
+		guard !searchQuery.isEmpty else {
+			self.shownRecipes = allRecipes
+			return
+		}
+		
+		if case .success = state {
+			self.shownRecipes = allRecipes.filter { recipe in
 					recipe.name.localizedCaseInsensitiveContains(searchQuery) ||
 					recipe.cuisine.localizedCaseInsensitiveContains(searchQuery)
 			}
-			state = self.shownRecipes.isEmpty ? .empty : .success(self.shownRecipes)
 		} else {
 			shownRecipes = []
 		}

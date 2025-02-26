@@ -36,11 +36,10 @@ final class RecipesListViewModelTests: XCTestCase {
 
 		await viewModel.fetchRecipesList()
 
-		guard case .success(let fetchedRecipes) = viewModel.state else {
+		guard case .success = viewModel.state else {
 			XCTFail("State should be success")
 			return
 		}
-		XCTAssertEqual(fetchedRecipes, recipes)
 		XCTAssertEqual(viewModel.shownRecipes, recipes)
 	}
 
@@ -69,7 +68,7 @@ final class RecipesListViewModelTests: XCTestCase {
 	}
 	
 	@MainActor
-	func test_searchQuery_filtersWithNoMatch_returnsEmptyRecipesAndUpdateState() async {
+	func test_searchQuery_filtersWithNoMatch_returnsEmptyShowRecipes() async {
 		let recipes = [
 			Recipe(
 				uuid: "mock-id",
@@ -105,7 +104,6 @@ final class RecipesListViewModelTests: XCTestCase {
 		viewModel.searchQuery = "Bellingham"
 
 		XCTAssertEqual(viewModel.shownRecipes.count, 0)
-		XCTAssertEqual(viewModel.state, .empty)
 	}
 
 	@MainActor

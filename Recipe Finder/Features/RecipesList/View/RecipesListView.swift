@@ -14,7 +14,7 @@ struct RecipesListView: View {
 	let columns = [
 		GridItem(.flexible()),
 		GridItem(.flexible()),
-	]
+	] 
 	
 	init(viewModel: RecipesListViewModel) {
 		_viewModel = StateObject(wrappedValue: viewModel)
@@ -51,51 +51,67 @@ struct RecipesListView: View {
 					ProgressView(viewModel.viewData.progressViewText)
 						.frame(maxWidth: .infinity, maxHeight: .infinity)
 				case .error:
-					CenteredVerticalScrollView {
-						PlaceholderView(
-							imageName: viewModel.viewData.errorImageName,
-							title: viewModel.viewData.errorTitle,
-							subtitle: viewModel.viewData.errorSubtitle,
-							imageSize: viewModel.viewData.errorImageSize
-						)
-					} onRefresh: {
-						try? await Task.sleep(nanoseconds: 300_000_000)
-						await viewModel.fetchRecipesList()
-					}
-					.scrollDismissesKeyboard(.interactively)
+					errorStateView
 				case .empty:
-					CenteredVerticalScrollView {
-						PlaceholderView(
-							imageName: viewModel.viewData.emptyImageName,
-							title: viewModel.viewData.emptyRecipesTitle
-						)
-					} onRefresh: {
-						try? await Task.sleep(nanoseconds: 300_000_000)
-						await viewModel.fetchRecipesList()
-					}
-					.scrollDismissesKeyboard(.interactively)
+					emptyStateView
 				case .success:
-					ScrollView {
-						LazyVGrid(columns: columns, spacing: 16) {
-							ForEach(
-								viewModel.shownRecipes,
-								id: \.uuid
-							) { recipe in
-								RecipeCardView(recipe: recipe)
-							}
-						}
-						.padding()
-						.animation(
-							.easeInOut,
-							value: viewModel.shownRecipes
-						)
-					}
-					.scrollDismissesKeyboard(.interactively)
-					.refreshable {
-						try? await Task.sleep(nanoseconds: 300_000_000)
-						await viewModel.fetchRecipesList()
+					if viewModel.shownRecipes.isEmpty {
+						emptyStateView
+					} else {
+						recipesListScrollView
 					}
 			}
+		}
+	}
+	
+	private var emptyStateView: some View {
+		CenteredVerticalScrollView {
+			PlaceholderView(
+				imageName: viewModel.viewData.emptyImageName,
+				title: viewModel.viewData.emptyRecipesTitle
+			)
+		} onRefresh: {
+			try? await Task.sleep(nanoseconds: 300_000_000)
+			await viewModel.fetchRecipesList()
+		}
+		.scrollDismissesKeyboard(.interactively)
+	}
+	
+	private var errorStateView: some View {
+		CenteredVerticalScrollView {
+			PlaceholderView(
+				imageName: viewModel.viewData.errorImageName,
+				title: viewModel.viewData.errorTitle,
+				subtitle: viewModel.viewData.errorSubtitle,
+				imageSize: viewModel.viewData.errorImageSize
+			)
+		} onRefresh: {
+			try? await Task.sleep(nanoseconds: 300_000_000)
+			await viewModel.fetchRecipesList()
+		}
+		.scrollDismissesKeyboard(.interactively)
+	}
+	
+	private var recipesListScrollView: some View {
+		ScrollView {
+			LazyVGrid(columns: columns, spacing: 16) {
+				ForEach(
+					viewModel.shownRecipes,
+					id: \.uuid
+				) { recipe in
+					RecipeCardView(recipe: recipe)
+				}
+			}
+			.padding()
+			.animation(
+				.easeInOut,
+				value: viewModel.shownRecipes
+			)
+		}
+		.scrollDismissesKeyboard(.interactively)
+		.refreshable {
+			try? await Task.sleep(nanoseconds: 300_000_000)
+			await viewModel.fetchRecipesList()
 		}
 	}
 }
