@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+struct Environment {
+	#if DEBUG
+	static let isDebug = true
+	#else
+	static let isDebug = false
+	#endif
+}
+
 @main
 struct My_Recipes_PrivateApp: App {
     var body: some Scene {

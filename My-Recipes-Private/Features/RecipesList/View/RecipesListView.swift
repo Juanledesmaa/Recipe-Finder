@@ -34,10 +34,16 @@ struct RecipesListView: View {
 	@ViewBuilder
 	private var content: some View {
 		VStack {
-			RoundedTextFieldView(
-				placeholder: viewModel.viewData.textFieldPlaceholder,
-				text: $viewModel.searchQuery
-			)
+			HStack {
+				RoundedTextFieldView(
+					placeholder: viewModel.viewData.textFieldPlaceholder,
+					text: $viewModel.searchQuery
+				)
+#if DEBUG
+				DebugConfigView()
+#endif
+			}
+			
 			Spacer()
 			
 			switch viewModel.state {
