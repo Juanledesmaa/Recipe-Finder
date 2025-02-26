@@ -41,7 +41,7 @@ final class RecipesListViewModelTests: XCTestCase {
 			return
 		}
 		XCTAssertEqual(fetchedRecipes, recipes)
-		XCTAssertEqual(viewModel.recipes, recipes)
+		XCTAssertEqual(viewModel.shownRecipes, recipes)
 	}
 
 	@MainActor
@@ -52,7 +52,7 @@ final class RecipesListViewModelTests: XCTestCase {
 			XCTFail("State should be empty")
 			return
 		}
-		XCTAssertTrue(viewModel.recipes.isEmpty)
+		XCTAssertTrue(viewModel.shownRecipes.isEmpty)
 	}
 
 	@MainActor
@@ -65,7 +65,47 @@ final class RecipesListViewModelTests: XCTestCase {
 			return
 		}
 		XCTAssertTrue(error is MockError)
-		XCTAssertTrue(viewModel.recipes.isEmpty)
+		XCTAssertTrue(viewModel.shownRecipes.isEmpty)
+	}
+	
+	@MainActor
+	func test_searchQuery_filtersWithNoMatch_returnsEmptyRecipesAndUpdateState() async {
+		let recipes = [
+			Recipe(
+				uuid: "mock-id",
+				name: "Arepas",
+				cuisine: "Venezuelan",
+				photoUrlLarge: nil,
+				photoUrlSmall: nil,
+				sourceUrl: nil,
+				youtubeUrl: nil
+			),
+			Recipe(
+				uuid: "mock-id2",
+				name: "Empanadas",
+				cuisine: "Argentinian",
+				photoUrlLarge: nil,
+				photoUrlSmall: nil,
+				sourceUrl: nil,
+				youtubeUrl: nil
+			),
+			Recipe(
+				uuid: "mock-id3",
+				name: "Asado",
+				cuisine: "Argentinian",
+				photoUrlLarge: nil,
+				photoUrlSmall: nil,
+				sourceUrl: nil,
+				youtubeUrl: nil
+			)
+		]
+		mockDataSource.mockResponse = .success(recipes)
+		await viewModel.fetchRecipesList()
+
+		viewModel.searchQuery = "Bellingham"
+
+		XCTAssertEqual(viewModel.shownRecipes.count, 0)
+		XCTAssertEqual(viewModel.state, .empty)
 	}
 
 	@MainActor
@@ -104,9 +144,9 @@ final class RecipesListViewModelTests: XCTestCase {
 
 		viewModel.searchQuery = "Argen"
 
-		XCTAssertEqual(viewModel.recipes.count, 2)
-		XCTAssertEqual(viewModel.recipes[0].name, "Empanadas")
-		XCTAssertEqual(viewModel.recipes[1].name, "Asado")
+		XCTAssertEqual(viewModel.shownRecipes.count, 2)
+		XCTAssertEqual(viewModel.shownRecipes[0].name, "Empanadas")
+		XCTAssertEqual(viewModel.shownRecipes[1].name, "Asado")
 	}
 	
 	@MainActor
@@ -146,7 +186,7 @@ final class RecipesListViewModelTests: XCTestCase {
 
 		viewModel.searchQuery = "Are"
 
-		XCTAssertEqual(viewModel.recipes.count, 1)
-		XCTAssertEqual(viewModel.recipes[0].name, "Arepas")
+		XCTAssertEqual(viewModel.shownRecipes.count, 1)
+		XCTAssertEqual(viewModel.shownRecipes[0].name, "Arepas")
 	}
 }

@@ -78,7 +78,7 @@ struct RecipesListView: View {
 					ScrollView {
 						LazyVGrid(columns: columns, spacing: 16) {
 							ForEach(
-								viewModel.recipes,
+								viewModel.shownRecipes,
 								id: \.uuid
 							) { recipe in
 								RecipeCardView(recipe: recipe)
@@ -87,7 +87,7 @@ struct RecipesListView: View {
 						.padding()
 						.animation(
 							.easeInOut,
-							value: viewModel.recipes
+							value: viewModel.shownRecipes
 						)
 					}
 					.scrollDismissesKeyboard(.interactively)

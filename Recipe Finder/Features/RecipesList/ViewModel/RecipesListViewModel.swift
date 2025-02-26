@@ -21,16 +21,30 @@ final class RecipesListViewModel: ObservableObject {
 		let emptyRecipesTitle = "No recipes could be found."
 	}
 	
-	enum RecipesListState {
+	enum RecipesListState: Equatable {
 		case loading
 		case error(Error)
 		case empty
 		case success([Recipe])
+
+		static func == (lhs: RecipesListState, rhs: RecipesListState) -> Bool {
+			switch (lhs, rhs) {
+			case (.loading, .loading),
+				 (.empty, .empty):
+				return true
+			case let (.success(lhsRecipes), .success(rhsRecipes)):
+				return lhsRecipes == rhsRecipes
+			case let (.error(lhsError), .error(rhsError)):
+				return lhsError.localizedDescription == rhsError.localizedDescription
+			default:
+				return false
+			}
+		}
 	}
 
 	let viewData = RecipesListViewData()
 	@Published var state: RecipesListState = .loading
-	@Published var recipes: [Recipe] = []
+	@Published var shownRecipes: [Recipe] = []
 	@Published var searchQuery: String = "" {
 		didSet {
 			filterRecipesIfNeeded()
@@ -45,6 +59,7 @@ final class RecipesListViewModel: ObservableObject {
 
 	func fetchRecipesList() async {
 		state = .loading
+		searchQuery = ""
 
 		do {
 			let result = try await recipesListDataSource.fetchRecipes()
@@ -57,13 +72,14 @@ final class RecipesListViewModel: ObservableObject {
 	
 	private func filterRecipesIfNeeded() {
 		if case .success(let recipes) = state {
-			self.recipes = searchQuery
+			self.shownRecipes = searchQuery
 				.isEmpty ? recipes : recipes.filter { recipe in
 					recipe.name.localizedCaseInsensitiveContains(searchQuery) ||
 					recipe.cuisine.localizedCaseInsensitiveContains(searchQuery)
 			}
+			state = self.shownRecipes.isEmpty ? .empty : .success(self.shownRecipes)
 		} else {
-			recipes = []
+			shownRecipes = []
 		}
 	}
 }
