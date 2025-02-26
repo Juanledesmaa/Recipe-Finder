@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct RecipesList: Codable, Equatable {
+struct RecipesList: Decodable, Equatable {
 	let recipes: [Recipe]
 }

@@ -27,6 +27,9 @@
 		281CD1F22D66CADB002B0621 /* My-Recipes-Private.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My-Recipes-Private.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		281CD2022D66CADC002B0621 /* My-Recipes-PrivateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "My-Recipes-PrivateTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		281CD20C2D66CADC002B0621 /* My-Recipes-PrivateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "My-Recipes-PrivateUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		288D5B972D6ECE8A00371606 /* Recipe Finder Debug.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Debug.xctestplan"; sourceTree = "<group>"; };
+		288D5BA32D6ED82A00371606 /* Recipe Finder Prod.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Prod.xctestplan"; sourceTree = "<group>"; };
+		288D5BA42D6ED84500371606 /* Recipe Finder Staging.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Staging.xctestplan"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -83,6 +86,9 @@
 		281CD1E92D66CADB002B0621 = {
 			isa = PBXGroup;
 			children = (
+				288D5BA42D6ED84500371606 /* Recipe Finder Staging.xctestplan */,
+				288D5BA32D6ED82A00371606 /* Recipe Finder Prod.xctestplan */,
+				288D5B972D6ECE8A00371606 /* Recipe Finder Debug.xctestplan */,
 				281CD1F42D66CADB002B0621 /* My-Recipes-Private */,
 				281CD2052D66CADC002B0621 /* My-Recipes-PrivateTests */,
 				281CD1F32D66CADB002B0621 /* Products */,

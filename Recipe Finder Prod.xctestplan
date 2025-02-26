@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "5B50382A-8A90-46FA-87C1-A3B55525A825",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:My-Recipes-Private.xcodeproj",
+      "identifier" : "281CD1F12D66CADB002B0621",
+      "name" : "My-Recipes-Private"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:My-Recipes-Private.xcodeproj",
+        "identifier" : "281CD2012D66CADC002B0621",
+        "name" : "My-Recipes-PrivateTests"
+      }
+    }
+  ],
+  "version" : 1
+}

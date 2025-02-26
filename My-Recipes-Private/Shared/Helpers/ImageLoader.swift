@@ -11,7 +11,7 @@ final class ImageLoader: ImageLoaderProtocol {
 	@Published var phase: AsyncImagePhase = .empty
 
 	private let url: URL?
-	private let urlSession: URLSession
+	private let urlSession: URLSessionProtocol
 	private let cache: URLCache
 	
 	private static let defaultCache: URLCache = {
@@ -31,7 +31,7 @@ final class ImageLoader: ImageLoaderProtocol {
 	init(
 		url: URL?,
 		phase: AsyncImagePhase = .empty,
-		urlSession: URLSession = ImageLoader.imageSession,
+		urlSession: URLSessionProtocol = ImageLoader.imageSession,
 		cache: URLCache = ImageLoader.defaultCache
 	) {
 		self.url = url

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Recipe: Codable, Equatable {
+struct Recipe: Decodable, Equatable {
 	let uuid: String
 	let name: String
 	let cuisine: String

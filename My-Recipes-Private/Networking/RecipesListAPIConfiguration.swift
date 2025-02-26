@@ -13,9 +13,9 @@ enum RecipesListAPIMode: String, CaseIterable {
 	case malformed = "recipes-malformed.json"
 }
 
-final class RecipesListAPIConfiguration {
+class RecipesListAPIConfiguration {
 	private let configuration: ConfigurationProtocol
-
+	private var apiMode: RecipesListAPIMode = .full
 	
 	init(
 		configuration: ConfigurationProtocol,
@@ -26,7 +26,6 @@ final class RecipesListAPIConfiguration {
 	
 	func makeRecipesListURL() -> URL? {
 		let baseUrl = configuration.baseUrl
-		var apiMode = RecipesListAPIMode.full
 #if DEBUG
 		apiMode = DebugAPIConfig().selectedMode
 #endif
@@ -35,6 +34,8 @@ final class RecipesListAPIConfiguration {
 		)
 	}
 }
+
+// MARK: - Debug API Config
 
 extension RecipesListAPIConfiguration {
 #if DEBUG

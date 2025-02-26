@@ -10,9 +10,9 @@ import Foundation
 final class NetworkClient: NetworkClientProtocol {
 	
 	private static let sharedSession = URLSession.shared
-	private let session: URLSession
+	private let session: URLSessionProtocol
 	
-	init(session: URLSession = sharedSession) {
+	init(session: URLSessionProtocol = sharedSession) {
 		self.session = session
 	}
 
