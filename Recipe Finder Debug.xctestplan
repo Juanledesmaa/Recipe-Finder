@@ -10,18 +10,18 @@
   ],
   "defaultOptions" : {
     "targetForVariableExpansion" : {
-      "containerPath" : "container:My-Recipes-Private.xcodeproj",
+      "containerPath" : "container:Recipe Finder.xcodeproj",
       "identifier" : "281CD1F12D66CADB002B0621",
-      "name" : "My-Recipes-Private"
+      "name" : "Recipe Finder"
     }
   },
   "testTargets" : [
     {
       "parallelizable" : false,
       "target" : {
-        "containerPath" : "container:My-Recipes-Private.xcodeproj",
+        "containerPath" : "container:Recipe Finder.xcodeproj",
         "identifier" : "281CD2012D66CADC002B0621",
-        "name" : "My-Recipes-PrivateTests"
+        "name" : "Recipe FinderTests"
       }
     }
   ],

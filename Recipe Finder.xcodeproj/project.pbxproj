@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2838CB3A2D6EE4140008E533 /* Recipe Finder Prod.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 2838CB382D6EE4140008E533 /* Recipe Finder Prod.xctestplan */; };
+		2838CB3B2D6EE4140008E533 /* Recipe Finder Staging.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 2838CB392D6EE4140008E533 /* Recipe Finder Staging.xctestplan */; };
+		2838CB3D2D6EE4140008E533 /* Recipe Finder Debug.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 2838CB372D6EE4140008E533 /* Recipe Finder Debug.xctestplan */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		281CD2032D66CADC002B0621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,13 +33,13 @@
 		281CD1F22D66CADB002B0621 /* Recipe Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		281CD2022D66CADC002B0621 /* Recipe FinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recipe FinderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		281CD20C2D66CADC002B0621 /* Recipe FinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recipe FinderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		288D5B972D6ECE8A00371606 /* Recipe Finder Debug.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Debug.xctestplan"; sourceTree = "<group>"; };
-		288D5BA32D6ED82A00371606 /* Recipe Finder Prod.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Prod.xctestplan"; sourceTree = "<group>"; };
-		288D5BA42D6ED84500371606 /* Recipe Finder Staging.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Staging.xctestplan"; sourceTree = "<group>"; };
+		2838CB372D6EE4140008E533 /* Recipe Finder Debug.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Debug.xctestplan"; sourceTree = "<group>"; };
+		2838CB382D6EE4140008E533 /* Recipe Finder Prod.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Prod.xctestplan"; sourceTree = "<group>"; };
+		2838CB392D6EE4140008E533 /* Recipe Finder Staging.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Recipe Finder Staging.xctestplan"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		281CD2342D66E75B002B0621 /* Exceptions for "My-Recipes-Private" folder in "Recipe Finder" target */ = {
+		285A1F852D6EE26300135D25 /* Exceptions for "Recipe Finder" folder in "Recipe Finder" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -43,17 +49,17 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		281CD1F42D66CADB002B0621 /* My-Recipes-Private */ = {
+		281CD1F42D66CADB002B0621 /* Recipe Finder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				281CD2342D66E75B002B0621 /* Exceptions for "My-Recipes-Private" folder in "Recipe Finder" target */,
+				285A1F852D6EE26300135D25 /* Exceptions for "Recipe Finder" folder in "Recipe Finder" target */,
 			);
-			path = "My-Recipes-Private";
+			path = "Recipe Finder";
 			sourceTree = "<group>";
 		};
-		281CD2052D66CADC002B0621 /* My-Recipes-PrivateTests */ = {
+		281CD2052D66CADC002B0621 /* Recipe Finder Tests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "My-Recipes-PrivateTests";
+			path = "Recipe Finder Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -86,11 +92,11 @@
 		281CD1E92D66CADB002B0621 = {
 			isa = PBXGroup;
 			children = (
-				288D5BA42D6ED84500371606 /* Recipe Finder Staging.xctestplan */,
-				288D5BA32D6ED82A00371606 /* Recipe Finder Prod.xctestplan */,
-				288D5B972D6ECE8A00371606 /* Recipe Finder Debug.xctestplan */,
-				281CD1F42D66CADB002B0621 /* My-Recipes-Private */,
-				281CD2052D66CADC002B0621 /* My-Recipes-PrivateTests */,
+				2838CB372D6EE4140008E533 /* Recipe Finder Debug.xctestplan */,
+				2838CB382D6EE4140008E533 /* Recipe Finder Prod.xctestplan */,
+				2838CB392D6EE4140008E533 /* Recipe Finder Staging.xctestplan */,
+				281CD1F42D66CADB002B0621 /* Recipe Finder */,
+				281CD2052D66CADC002B0621 /* Recipe Finder Tests */,
 				281CD1F32D66CADB002B0621 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,7 +127,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				281CD1F42D66CADB002B0621 /* My-Recipes-Private */,
+				281CD1F42D66CADB002B0621 /* Recipe Finder */,
 			);
 			name = "Recipe Finder";
 			packageProductDependencies = (
@@ -144,7 +150,7 @@
 				281CD2042D66CADC002B0621 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				281CD2052D66CADC002B0621 /* My-Recipes-PrivateTests */,
+				281CD2052D66CADC002B0621 /* Recipe Finder Tests */,
 			);
 			name = "Recipe FinderTests";
 			packageProductDependencies = (
@@ -229,6 +235,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2838CB3A2D6EE4140008E533 /* Recipe Finder Prod.xctestplan in Resources */,
+				2838CB3B2D6EE4140008E533 /* Recipe Finder Staging.xctestplan in Resources */,
+				2838CB3D2D6EE4140008E533 /* Recipe Finder Debug.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,11 +414,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"My-Recipes-Private/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Recipe Finder/Preview Content\"";
 				DEVELOPMENT_TEAM = QQK2763276;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "My-Recipes-Private/Info.plist";
+				INFOPLIST_FILE = "Recipe Finder/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Recipe Finder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -441,11 +450,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"My-Recipes-Private/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Recipe Finder/Preview Content\"";
 				DEVELOPMENT_TEAM = QQK2763276;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "My-Recipes-Private/Info.plist";
+				INFOPLIST_FILE = "Recipe Finder/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Recipe Finder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
