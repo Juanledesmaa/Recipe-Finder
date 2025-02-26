@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct Environment {
-	#if DEBUG
+#if DEBUG
 	static let isDebug = true
-	#else
+#else
 	static let isDebug = false
-	#endif
+#endif
 }
 
 @main
 struct RecipeFinderApp: App {
-    var body: some Scene {
-        WindowGroup {
+	var body: some Scene {
+		WindowGroup {
 			let networkClient = NetworkClient(
 				session: URLSession(
 					configuration: .ephemeral
@@ -33,11 +33,11 @@ struct RecipeFinderApp: App {
 				networkClient: networkClient,
 				apiConfiguration: recipesListAPIConfiguration
 			)
-
+			
 			let viewModel = RecipesListViewModel(
 				recipesListDataSource: remoteDataSource
 			)
 			RecipesListView(viewModel: viewModel)
-        }
-    }
+		}
+	}
 }
